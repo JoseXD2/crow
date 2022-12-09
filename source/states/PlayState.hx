@@ -900,7 +900,7 @@ class PlayState extends MusicBeatState
 
                 #if android
 		addAndroidControls();
-	        androidc.visible = true;
+	        androidControls.visible = true;
 	        #end
 			
 		startingSong = true;
