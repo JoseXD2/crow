@@ -184,6 +184,10 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 		trace("Line 165");
 
 		FlxG.stage.addEventListener(MouseEvent.MOUSE_WHEEL,scroll);
