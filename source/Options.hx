@@ -183,25 +183,8 @@ class StateOption extends Option
 		return false;
 	}
 }
-class AndroidControls extends Option
-{
-	public function new()
-	{
-		super();
-	}
+	
 
-	public override function press():Bool
-	{
-		trace("switch");
-		FlxG.switchState(new android.AndroidControlsMenu());
-		return false;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Android Controls";
-	}
-}
 class OptionCheckbox extends FlxSprite
 {
 	public var state:Bool=false;
