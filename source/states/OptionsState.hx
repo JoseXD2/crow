@@ -65,7 +65,7 @@ class OptionsState extends MusicBeatState
 				// TODO: make a better 'calibrate offset'
 			]),
 			new OptionCategory("Appearance",[
-				new AndroidControls(),
+				
 				new ToggleOption("showComboCounter","Show combo","Shows your combo when you hit a note"),
 				new ToggleOption("showRatings","Show judgements","Shows judgements when you hit a note"),
 				new ToggleOption("showMS","Show Hit MS","Shows millisecond difference when you hit a note"),
@@ -161,7 +161,7 @@ class OptionsState extends MusicBeatState
 		add(optionDesc);
 		
                 #if android
-		addVirtualPad(FULL, A_B);
+		addVirtualPad(LEFT_FULL, A_B_C);
 		#end
 
 	}
@@ -237,6 +237,14 @@ class OptionsState extends MusicBeatState
 		{
 			changeSelection(-1);
 		}
+		#if android
+		if (virtualPad.buttonC.justPressed) {
+			#if android
+			removeVirtualPad();
+			#end
+			MusicBeatState.switchState(new android.AndroidControlsSubState());
+		}
+		#end
 		if (downP)
 		{
 			changeSelection(1);
