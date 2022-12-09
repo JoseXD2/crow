@@ -1,0 +1,71 @@
+{
+	"charOffset": [
+		0,
+		0
+	],
+	"singDur": 4,
+	"spritesheet": "Becky",
+	"anims": [
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"fps": 24,
+			"prefix": "becky Dancing Beat Hair blowing CAR",
+			"indices": [
+				30,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			],
+			"name": "danceLeft",
+			"looped": false
+		},
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"fps": 24,
+			"prefix": "becky Dancing Beat Hair blowing CAR",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29
+			],
+			"name": "danceRight",
+			"looped": false
+		}
+	],
+	"flipX": false,
+	"antialiasing": true,
+	"iconName": "becky",
+	"beatDancer": true,
+	"healthColor": "0xFFA5004D",
+	"format": "andromeda"
+}
