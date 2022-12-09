@@ -8,9 +8,7 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import lime.app.Application;
-#if windows 
 import Discord.DiscordClient;
-#end
 import flixel.FlxSprite;
 import Options;
 import flixel.ui.FlxBar;
@@ -85,7 +83,7 @@ class CachingState extends FlxUIState {
     add(icon);
 
     FlxG.sound.playMusic(Paths.music('old/title'));
-
+    
     var list = Assets.list();
 
     if(EngineData.options.cachePreload){
@@ -152,12 +150,8 @@ class CachingState extends FlxUIState {
           }
         }
     }
-    
 
 
-      
-    
-    
     toLoad = images.length+sounds.length;
     if(toLoad<=0){
       InitState.initTransition();
@@ -234,7 +228,6 @@ class CachingState extends FlxUIState {
           trace("loaded " + msg);
           loaded++;
           soundsLoaded++;
-
         }
       }
     });
