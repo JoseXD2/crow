@@ -46,6 +46,10 @@ class GitarooPauseState extends MusicBeatState
 		cancelButton.animation.play('selected');
 		add(cancelButton);
 
+		#if android
+		addVirtualPad(LEFT_RIGHT, A);
+		#end	
+			
 		changeThing();
 
 
