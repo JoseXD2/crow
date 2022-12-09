@@ -142,9 +142,9 @@ class InitState extends FlxUIState {
     //characters
     var nextState:FlxUIState = new TitleState();
     if(currentOptions.shouldCache && canCache){
-	    #if !android
+
       nextState = new CachingState(nextState);
-	    #end
+	    
     }else{
       initTransition();
       transIn = FlxTransitionableState.defaultTransIn;
