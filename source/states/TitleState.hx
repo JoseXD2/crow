@@ -47,12 +47,13 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		
+		curWacky = FlxG.random.getObject(getIntroTextShit());
+
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
-
-		curWacky = FlxG.random.getObject(getIntroTextShit());
-
+			
 		// DEBUG BULLSHIT
 
 		super.create();
