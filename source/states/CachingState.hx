@@ -86,83 +86,78 @@ class CachingState extends FlxUIState {
 
     FlxG.sound.playMusic(Paths.music('old/title'));
 
+    var list = Assets.list();
+
     if(EngineData.options.cachePreload){
-      if(FileSystem.isDirectory("assets/images") ){
-        for (file in FileSystem.readDirectory("assets/images"))
+    	 var imageList = list.filter(text -> text.contains('assets/images'));
+        //imageList = imageList.split(':')[1]; // idk about dpes it needed or no, so is commented for now
+        for (file in imageList)
         {
-          if(file.endsWith(".png") && !FileSystem.isDirectory(file)){ // TODO: recursively go through all directories
-            images.push('assets/images/${file}');
+          if(file.endsWith(".png")){ // TODO: recursively go through all directories
+            images.push('${file}');
           }
         }
-      }
     }
 
     if(EngineData.options.cacheCharacters){
-      if(FileSystem.isDirectory("assets/characters/images") ){
-        for (file in FileSystem.readDirectory("assets/characters/images"))
+        var charImageList = list.filter(text -> text.contains('assets/characters/images'));
+        //charImageList = charImageList.split(':')[1]; // idk about dpes it needed or no, so is commented for now
+        for (file in charImageList)
         {
-          if(file.endsWith(".png") && !FileSystem.isDirectory(file)){
-            images.push('assets/characters/images/${file}');
+          if(file.endsWith(".png")){
+            images.push('${file}');
           }
         }
-      }
     }
     if(EngineData.options.cacheSongs){
-      if(FileSystem.isDirectory("assets/songs") ){
-        for (dir in FileSystem.readDirectory("assets/songs"))
-        {
-          if (FileSystem.isDirectory('assets/songs/${dir}')){
-            for (file in FileSystem.readDirectory('assets/songs/${dir}'))
+        var songsList = list.filter(text -> text.contains('assets/songs'));
+            for (file in songsList)
             {
               if(file.endsWith('.mp3') || file.endsWith('.ogg')){
-                sounds.push('assets/songs/${dir}/${file}');
+                sounds.push('${file}');
               }
             }
-          }
-        }
       }
-
-
-      if(FileSystem.isDirectory("assets/music") ){
-        for (file in FileSystem.readDirectory("assets/music"))
+      
+      
+      var musicList = list.filter(text -> text.contains('assets/music'));
+        for (file in musicList)
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
-            sounds.push('assets/music/${file}');
+            sounds.push('${file}');
           }
         }
-      }
-
-      if(FileSystem.isDirectory("assets/shared/music") ){
-        for (file in FileSystem.readDirectory("assets/shared/music"))
+        
+        var sharedMusicList = list.filter(text -> text.contains('assets/shared/music'));
+        for (file in sharedMusicList)
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
-            sounds.push('assets/shared/music/${file}');
+            sounds.push('${file}');
           }
         }
-      }
-
-    }
 
     if(EngineData.options.cacheSounds){
-      if(FileSystem.isDirectory("assets/sounds") ){
-        for (file in FileSystem.readDirectory("assets/sounds"))
+      var soundList = list.filter(text -> text.contains('assets/sounds'));
+        for (file in soundList)
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
-            sounds.push('assets/sounds/${file}');
+            sounds.push('${file}');
           }
         }
-      }
-      if(FileSystem.isDirectory("assets/shared/sounds") ){
-        for (file in FileSystem.readDirectory("assets/shared/sounds"))
+      var sharedSoundList = list.filter(text -> text.contains('assets/shared/sounds'));
+        for (file in sharedSoundList)
         {
           if(file.endsWith('.mp3') || file.endsWith('.ogg')){
-            sounds.push('assets/shared/sounds/${file}');
+            sounds.push('${file}');
           }
         }
-      }
     }
+    
 
 
+      
+    
+    
     toLoad = images.length+sounds.length;
     if(toLoad<=0){
       InitState.initTransition();
@@ -198,7 +193,10 @@ class CachingState extends FlxUIState {
         if(msg!=null && msg!=recentlyLoadedImg){
           recentlyLoadedImg=msg;
           var id = msg.replace(".png","");
-          var data:BitmapData = BitmapData.fromFile(msg);
+          if (msg.contains('/characters/') && !msg.startsWith('characters:')) {
+                  msg = 'characters:' + msg;
+          }
+          var data:BitmapData = Assets.getBitmapData(msg);
           var graphic = FlxG.bitmap.add(data,true,id);
           graphic.persist=true;
           graphic.destroyOnNoUse=false;
@@ -220,16 +218,23 @@ class CachingState extends FlxUIState {
         var msg:Null<String> = Thread.readMessage(false);
         if(msg!=null && msg!=recentlyLoadedSnd){
           recentlyLoadedSnd=msg;
+          if (msg.contains('/songs/') && !msg.startsWith('songs:')) {
+                  msg = 'songs:' + msg;
+          }
+          if (msg.contains('/shared/') && !msg.startsWith('shared:')) {
+                  msg = 'shared:' + msg;
+          }
           if(Assets.exists(msg, AssetType.SOUND) || Assets.exists(msg, AssetType.MUSIC)){ // https://github.com/HaxeFlixel/flixel/blob/master/flixel/system/frontEnds/SoundFrontEnd.hx
             var sound = FlxG.sound.cache(msg);
             CoolUtil.cacheSound(msg,sound);
           }else{
-            CoolUtil.cacheSound(msg,Sound.fromFile('./$msg'));
+            CoolUtil.cacheSound(msg,Assets.getSound(msg));
           }
 
           trace("loaded " + msg);
           loaded++;
           soundsLoaded++;
+
         }
       }
     });
