@@ -247,6 +247,11 @@ class FreeplayState extends MusicBeatState
 
 		changeSelection();
 		changeDiff();
+		
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 
 		// FlxG.sound.playMusic(Paths.music('title'), 0);
 		// FlxG.sound.music.fadeIn(2, 0, 0.8);
@@ -277,6 +282,7 @@ class FreeplayState extends MusicBeatState
 
 	}
 
+	#if (windows && !html5)
 	public function addSongData(songData:EngineData.SongData){
 		songNames.push(songData.chartName.toLowerCase());
 		songs.push(songData);
@@ -294,7 +300,7 @@ class FreeplayState extends MusicBeatState
 			difficulties.push([0,1,2]);
 		}
 	}
-
+        #end
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, ?chartName:String)
 	{
 		addSongData(new SongData(songName,songCharacter,weekNum,chartName));
