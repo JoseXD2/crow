@@ -242,7 +242,7 @@ class OptionsState extends MusicBeatState
 			#if android
 			removeVirtualPad();
 			#end
-			MusicBeatState.switchState(new android.AndroidControlsSubState());
+			FlxG.switchState(new android.AndroidControlsSubState());
 		}
 		#end
 		if (downP)
