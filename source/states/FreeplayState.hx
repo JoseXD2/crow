@@ -282,7 +282,7 @@ class FreeplayState extends MusicBeatState
 
 	}
 
-	#if (windows && !html5)
+	
 	public function addSongData(songData:EngineData.SongData){
 		songNames.push(songData.chartName.toLowerCase());
 		songs.push(songData);
@@ -300,7 +300,7 @@ class FreeplayState extends MusicBeatState
 			difficulties.push([0,1,2]);
 		}
 	}
-        #end
+        
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, ?chartName:String)
 	{
 		addSongData(new SongData(songName,songCharacter,weekNum,chartName));
