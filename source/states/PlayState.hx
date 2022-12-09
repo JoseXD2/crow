@@ -897,6 +897,12 @@ class PlayState extends MusicBeatState
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
 		// cameras = [FlxG.cameras.list[1]];
+
+                #if android
+		addAndroidControls();
+	        androidControls.visible = true;
+	        #end
+			
 		startingSong = true;
 
 		var removing:Array<Note>=[];
@@ -1941,7 +1947,7 @@ class PlayState extends MusicBeatState
 			health=0;
 		}
 		previousHealth=health;
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
