@@ -2564,6 +2564,22 @@ class PlayState extends MusicBeatState
                         handleInput(3);
                         updateReceptors();
                 }	
+		if (controls.LEFT_R) {
+                        pressedKeys[0] = false;
+                        updateReceptors();
+                }
+                if (controls.DOWN_R) {
+                        pressedKeys[1] = false;
+                        updateReceptors();
+                }
+                if (controls.UP_R) {
+                        pressedKeys[2] = false;
+                        updateReceptors();
+                }
+                if (controls.RIGHT_R) {
+                        pressedKeys[3] = false;
+                        updateReceptors();
+                }	
 	}
 
 	function endSong():Void
