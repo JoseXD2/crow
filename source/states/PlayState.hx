@@ -1132,8 +1132,8 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN,keyPress);
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP,keyRelease);
+		//FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN,keyPress);
+		//FlxG.stage.addEventListener(KeyboardEvent.KEY_UP,keyRelease);
 
 		inCutscene = false;
 
@@ -2547,6 +2547,23 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
 		#end
+			
+		if (controls.LEFT_P) {
+                        handleInput(0);
+                        updateReceptors();
+                }
+                if (cotrols.DOWN_P) {
+                        handleInput(1);
+                        updateReceptors();
+                }
+                if (controls.UP_P) {
+                        handleInput(2);
+                        updateReceptors();
+                }
+                if (cotrols.RIGHT_P) {
+                        handleInput(3);
+                        updateReceptors();
+                }	
 	}
 
 	function endSong():Void
