@@ -3137,12 +3137,8 @@ class PlayState extends MusicBeatState
 		var direction = bindData.indexOf(event.keyCode);
 		if(direction!=-1 && !pressedKeys[direction]){
 			pressedKeys[direction]=true;
-			if(direction==4){
-				handleDodge();
-			}else{
-				handleInput(direction);
-				updateReceptors();
-			}
+			handleInput(direction);
+			updateReceptors();
 		}
 
 	}
