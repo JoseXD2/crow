@@ -3125,7 +3125,9 @@ class PlayState extends MusicBeatState
 		});
 	}
 
+
 	private function keyPress(event:KeyboardEvent){
+		if(paused)return;
 		#if !NO_BOTPLAY
 		if(event.keyCode == FlxKey.F6){
 			ScoreUtils.botPlay = !ScoreUtils.botPlay;
@@ -3135,8 +3137,12 @@ class PlayState extends MusicBeatState
 		var direction = bindData.indexOf(event.keyCode);
 		if(direction!=-1 && !pressedKeys[direction]){
 			pressedKeys[direction]=true;
-			handleInput(direction);
-			updateReceptors();
+			if(direction==4){
+				handleDodge();
+			}else{
+				handleInput(direction);
+				updateReceptors();
+			}
 		}
 
 	}
@@ -3144,9 +3150,18 @@ class PlayState extends MusicBeatState
 	private function keyRelease(event:KeyboardEvent){
 		if(ScoreUtils.botPlay)return;
 		var direction = bindData.indexOf(event.keyCode);
-		if(direction!=-1 && pressedKeys[direction]){
-			pressedKeys[direction]=false;
-			updateReceptors();
+		if(pressedKeys[direction]){
+			// if this gets too long, swap this to a switch/case
+			if(direction!=-1 && pressedKeys[direction]){
+				pressedKeys[direction]=false;
+				if(!paused){
+					if(direction==4){
+
+					}else{
+						updateReceptors();
+					}
+				}
+			}
 		}
 	}
 
@@ -3158,17 +3173,16 @@ class PlayState extends MusicBeatState
 
 			// TODO: chord cohesion, maybe
 			if(hitting.length>0){
-				playing.holdTimer=0;
-				for(hit in hitting){
-					noteHit(hit);
-					break;
-				}
+				boyfriend.holdTimer=0;
+				noteHit(hitting[0]);
 			}else{
 				if(currentOptions.ghosttapSounds)
 					FlxG.sound.play(Paths.sound('Ghost_Hit'),currentOptions.hitsoundVol/100);
 
-				if(currentOptions.ghosttapping==false)
-					badNoteCheck();
+				if(currentOptions.ghosttapping==false){
+					showMiss(direction);
+					health -= 0.023;
+				}
 			}
 
 		}
