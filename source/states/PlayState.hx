@@ -441,10 +441,10 @@ class PlayState extends MusicBeatState
 		ScoreUtils.wifeZeroPoint = judgeMan.getWifeZero();
 
 		bindData = [
-			OptionUtils.getKey(Control.LEFT),
-			OptionUtils.getKey(Control.DOWN),
-			OptionUtils.getKey(Control.UP),
-			OptionUtils.getKey(Control.RIGHT),
+			OptionUtils.getKey(controls.LEFT),
+			OptionUtils.getKey(controls.DOWN),
+			OptionUtils.getKey(controls.UP),
+			OptionUtils.getKey(controls.RIGHT),
 		];
 
 		if (FlxG.sound.music != null)
